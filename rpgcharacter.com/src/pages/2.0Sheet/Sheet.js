@@ -44,8 +44,8 @@ class Sheet extends Component {
   componentDidMount = () => {};
   getStats = () => {
     let arr = [];
-    this.state.abilityScores.foreach((element) => {
-      arr.push(<statItem stat={element} />);
+    this.state.abilityScores.forEach((element,index) => {
+      arr.push(<StatItem key ={index} stat={element} />);
     });
     return arr;
   }
