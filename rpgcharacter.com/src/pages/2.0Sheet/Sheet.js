@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
 import { StatItem, StatInput } from "../../components/StatItem";
 import "./Sheet.css";
-import { SkillInput, SkillConstructor } from "../../components/Skill";
-import { Stat } from "../../Constructors";
+import { Stat, Skill, Item, RPGClass, Background } from "../../Constructors";
 
 class Sheet extends Component {
   state = {
@@ -12,9 +11,11 @@ class Sheet extends Component {
     //     'Point',
     //     'Roll'
     // ],
-    creationMode: 0,
+    // creationMode: 0,
     characterName: "",
     playerName: "",
+    rpgClass: new RPGClass("Fighter", "Str", 10),
+    background: new Background(),
     xp: 0,
     ancestry: "",
     abilityScores: [
@@ -25,23 +26,42 @@ class Sheet extends Component {
       new Stat("Wisdom", "Wis", 10),
       new Stat("Charisma", "Cha", 10),
     ],
-    classDC: {},
-    skills: {},
-    meleeAttacks: {},
-    rangeAttacks: {},
-    weaponProficiencies: {},
-    languages: {},
-    speed: {},
-    hitPoints: {},
-    perception: {},
+    classDC: 0,
+    skills: [
+      new Skill("Acrobatics", "Dex", "Untrained"),
+      new Skill("Arcana", "Int", "Untrained"),
+      new Skill("Athletics", "Str", "Trained"),
+
+
+    ],
+    meleeAttacks: [],
+    rangeAttacks: [],
+    weaponProficiencies: [],
+    languages: [],
+    speed: [],
+    hitPoints: 10,
+    perception: new Skill("Perception", "Trained","Wis", 0, 1),
     ancestryFeats: [],
     skillFeats: [],
     generalFeats: [],
     classFeatsAndAbilities: [],
     bonusFeats: [],
     inventory: [],
+    itembonuses: [],
+    level: 1
   };
   componentDidMount = () => {};
+
+  calculateItemBonuses = (bonusType)=>{
+    let total = 0;
+    this.state.itembonuses.forEach((element)=>{
+      if(element.type == bonusType){
+        total += element.bonusValue;
+      }
+    })
+    return total;
+  }
+
   getStats = () => {
     let arr = [];
     this.state.abilityScores.forEach((element,index) => {
@@ -49,10 +69,12 @@ class Sheet extends Component {
     });
     return arr;
   }
+
   render = () => {
     return (
       <div>
-        <div class="stat-block">{this.getStats()}</div>
+        <div>{this.getStats()}</div>
+        <div></div>
       </div>
     );
   }

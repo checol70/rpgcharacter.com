@@ -1,0 +1,15 @@
+class Skill{
+    Skill(name, trainingLevel,stat,itemBonus, level){
+        this.name = name;
+        this.trainingLevel = trainingLevel;
+        this.stat = stat;
+        this.itemBonus = itemBonus;
+        this.value = this.calculateSkill(level)
+    }
+    calculateSkill =(level)=> {
+        let trainingTotal = 0;
+        this.trainingLevel === "Trained"? trainingTotal = 2:this.trainingLevel === "Expert"? trainingTotal = 4: this.trainingLevel === "Master"? trainingTotal = 6: this.trainingLevel === "Legend"? trainingTotal = 8: trainingTotal = 0;
+        return this.stat.value + trainingTotal > 0? level: 0 + trainingTotal + this.itemBonus;  
+    }
+}
+export {Skill};
