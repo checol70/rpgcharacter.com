@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import axios from "axios";
 import { StatItem, StatInput } from "../../components/StatItem";
 import "./Sheet.css";
-import { Stat, Skill, Item, RPGClass, Background } from "../../Constructors";
+import { Stat, Skill, Item, RPGClass, Background, Ancestry,Feat } from "../../Constructors";
 
 class Sheet extends Component {
   state = {
@@ -15,9 +15,9 @@ class Sheet extends Component {
     characterName: "",
     playerName: "",
     rpgClass: new RPGClass("Fighter", "Str", 10),
-    background: new Background(),
+    background: new Background("Artisan",[["Str", "Int"],"Free"],["Crafting", "Guild Lore"], new Feat("Specialty Crafting", ["Crafting", "Downtime"], "Skill", "Gain bonuses to craft certain items", "Choose a kind of item from the options. You gain a +1 bonus to craft checks for items of that type. this bonus increases to +2 for  if you are a Master.")),
     xp: 0,
-    ancestry: "",
+    ancestry: new Ancestry("Human", 8, "Medium", 25, ["Free", "Free"],"None",["Human","Humanoid"]),
     abilityScores: [
       new Stat("Strength", "Str", 10),
       new Stat("Dexterity", "Dex", 10),
@@ -26,7 +26,7 @@ class Sheet extends Component {
       new Stat("Wisdom", "Wis", 10),
       new Stat("Charisma", "Cha", 10),
     ],
-    classDC: 0,
+    classDC: {},
     skills: [
       new Skill("Acrobatics", "Dex", "Untrained"),
       new Skill("Arcana", "Int", "Untrained"),
@@ -50,12 +50,14 @@ class Sheet extends Component {
     itembonuses: [],
     level: 1
   };
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    this.state.classDC = new Skill("Class DC", "Trained","Str",10 + this.calculateItemBonuses("Class DC"), this.state.level)
+  };
 
   calculateItemBonuses = (bonusType)=>{
     let total = 0;
     this.state.itembonuses.forEach((element)=>{
-      if(element.type == bonusType){
+      if(element.type === bonusType){
         total += element.bonusValue;
       }
     })
