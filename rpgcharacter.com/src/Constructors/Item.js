@@ -1,6 +1,7 @@
 class Item {
-    Item(name, bonusType, cost, bulk, bonusValue){
+    Item(name,type, bonusType, cost, bulk, bonusValue){
         this.name = name;
+        this.type = type;
         this.bonusType = bonusType;
         this.cost = cost;
         this.bulk = bulk;

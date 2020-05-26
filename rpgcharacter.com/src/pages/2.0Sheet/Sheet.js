@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 //import axios from "axios";
-import { StatItem, StatInput } from "../../components/StatItem";
+import { StatItem } from "../../components/StatItem";
 import "./Sheet.css";
 import {
+  Heritage,
   Stat,
   Skill,
   Item,
@@ -63,26 +64,26 @@ class Sheet extends Component {
       new Stat("Wisdom", "Wis", 10),
       new Stat("Charisma", "Cha", 10),
     ],
-    classDC: {},
+    classDC: new Skill("ClassDC", "Str", "Trained"),
     skills: [
       new Skill("Acrobatics", "Dex", "Untrained"),
       new Skill("Arcana", "Int", "Untrained"),
       new Skill("Athletics", "Str", "Trained"),
       new Skill("Crafting", "Int", "Trained"),
-      new Skill("Deception", "Cha", ""),
-      new Skill("Diplomacy", "Cha", ""),
-      new Skill("Intimidation", "Cha", ""),
-      new Skill("Lore", "Int", ""),
-      new Skill("Lore", "Int", ""),
-      new Skill("Medicine", "Wis", ""),
-      new Skill("Nature", "Int", ""),
-      new Skill("Occultism", "", ""),
-      new Skill("Performance", "", ""),
-      new Skill("Religion", "", ""),
-      new Skill("Society", "", ""),
-      new Skill("Stealth", "", ""),
-      new Skill("Survival", "", ""),
-      new Skill("Thievery", "", ""),
+      new Skill("Deception", "Cha", "Untrained"),
+      new Skill("Diplomacy", "Cha", "Untrained"),
+      new Skill("Intimidation", "Cha", "Untrained"),
+      new Skill("Lore", "Int", "Untrained"),
+      new Skill("Lore", "Int", "Untrained"),
+      new Skill("Medicine", "Wis", "Untrained"),
+      new Skill("Nature", "Int", "Trained"),
+      new Skill("Occultism", "Int", "Untrained"),
+      new Skill("Performance", "Cha", "Untrained"),
+      new Skill("Religion", "Wis", "Untrained"),
+      new Skill("Society", "Int", "Trained"),
+      new Skill("Stealth", "Dex", "Untrained"),
+      new Skill("Survival", "Wis", "Untrained"),
+      new Skill("Thievery", "Dex", "Untrained"),
     ],
     meleeAttacks: [],
     rangeAttacks: [],
@@ -103,7 +104,9 @@ class Sheet extends Component {
         null
       ),
     ],
-    skillFeats: [this.state.background.skillFeat],
+    skillFeats: [
+      //remember to display the background skill feat here, but will leave it in the background to save performance.
+    ],
     generalFeats: [
       new Feat(
         "Diehard",
@@ -124,7 +127,7 @@ class Sheet extends Component {
         "When hit by a melee strike you can use a reaction to raise your shield. The shields AC bonus counts against the triggering attack",
         1,
         "You are wielding a shield",
-        "You can snap your shield into place just as you would take a blow, avoiding the the hit at the last second. You immediately use the Rais a Shield action and gain your shield's bonus to AC. the circumstance bonus from the shield applies to your AC when you're determining the outcome of the triggering attack.",
+        "You can snap your shield into place just as you would take a blow, avoiding the the hit at the last second. You immediately use the Raise a Shield action and gain your shield's bonus to AC. the circumstance bonus from the shield applies to your AC when you're determining the outcome of the triggering attack.",
         null,
         "An enemy hits you with a melee Strike"
       ),
@@ -152,18 +155,21 @@ class Sheet extends Component {
       ),
     ],
     bonusFeats: [],
-    inventory: [],
+    inventory: [new Item("Dagger", "Weapon", null, )],
     itembonuses: [],
     level: 1,
+    money:[0,15,0,0]
   };
   componentDidMount = () => {
-    this.state.classDC = new Skill(
+    let state = this.state;
+    state.classDC = new Skill(
       "Class DC",
       "Trained",
       "Str",
       10 + this.calculateItemBonuses("Class DC"),
       this.state.level
     );
+    this.setState(state);
   };
 
   calculateItemBonuses = (bonusType) => {
