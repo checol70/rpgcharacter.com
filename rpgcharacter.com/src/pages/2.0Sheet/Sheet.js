@@ -155,10 +155,38 @@ class Sheet extends Component {
       ),
     ],
     bonusFeats: [],
-    inventory: [new Item("Dagger", "Weapon", null, )],
+    inventory: [
+      new Item(
+        "Dagger",
+        "Weapon",
+        null,
+        [0, 0, 2, 0],
+        "1d4 P",
+        0.5,
+        1,
+        "Knife",
+        ["agile", "finesse", "thrown 10 ft.", "versatile S"],
+        null,
+        null,
+        null,
+        null,
+        null
+      ),
+      new Item(
+        "Hide Armor",
+        "Armor",
+        "AC",
+        [0,2,0,0],
+        null,
+        2,
+        null,
+        "Medium",
+        
+      ),
+    ],
     itembonuses: [],
     level: 1,
-    money:[0,15,0,0]
+    money: [0, 15, 0, 0],
   };
   componentDidMount = () => {
     let state = this.state;
