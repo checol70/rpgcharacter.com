@@ -216,7 +216,7 @@ class Sheet extends Component {
 
   getStats = () => {
     let arr = [];
-    this.state.abilityScores.forEach((element, index) => {
+    Object.values(this.state.abilityScores).forEach((element, index) => {
       arr.push(<StatItem key={index} stat={element} />);
     });
     return arr;
