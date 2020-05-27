@@ -1,4 +1,3 @@
 
-export * from "./Skill";
+export * from "./SkillShower";
 export * from "./SkillInput";
-export * from "./SkillConstructor";

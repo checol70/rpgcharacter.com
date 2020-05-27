@@ -12,18 +12,16 @@ import {
   Ancestry,
   Feat,
 } from "../../Constructors";
+import {SkillShower} from  "../../components/Skill"
 
 class Sheet extends Component {
   state = {
-    // possibleStatCreationModes=[
-    //     'Standard',
-    //     'Point',
-    //     'Roll'
-    // ],
-    // creationMode: 0,
-    characterName: "",
-    playerName: "",
+    characterName: "Fredericus Smith",
+    playerName: "Colton",
     rpgClass: new RPGClass("Fighter", "Str", 10),
+    alignment: "Lawful neutral",
+    xp: 0,
+    traits: "",
     background: new Background(
       "Artisan",
       [["Str", "Int"], "Free"],
@@ -38,7 +36,6 @@ class Sheet extends Component {
         "Choose a kind of item from the options. You gain a +1 bonus to craft checks for items of that type. this bonus increases to +2 if you are a Master. as a blacksmith this bonus extends to Durable metal goods, including metal armor"
       )
     ),
-    xp: 0,
     ancestry: new Ancestry("Human", 8, "Medium", 25, ["Free", "Free"], "None", [
       "Human",
       "Humanoid",
@@ -105,7 +102,7 @@ class Sheet extends Component {
       ),
     ],
     skillFeats: [
-      //remember to display the background skill feat here, but will leave it in the background to save performance.
+      //remember to display the background skill feat here, but will leave it in the background to save space.
     ],
     generalFeats: [
       new Feat(
@@ -178,7 +175,7 @@ class Sheet extends Component {
         "hide armor",
         "Armor",
         "AC",
-        [0,2,0,0],
+        [0, 2, 0, 0],
         null,
         2,
         null,
@@ -190,100 +187,21 @@ class Sheet extends Component {
         -5,
         14
       ),
-      new Item(
-        1,
-        "backpack",
-        "Utility",
-        null,
-        [0,0,1,0],
-        null,
-        0
-      ),
-      new Item(
-        1,
-        "bedroll",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        2,
-        "belt pouch",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        10,
-        "pieces of chalk",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        1,
-        "flint and steel",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        50,
-        "feet of rope",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        14,
-        "rations",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        1,
-        "soap",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        5,
-        "torches",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      ),
-      new Item(
-        1,
-        "waterskin",
-        "Utility",
-        null,
-        [],
-        null,
-        0
-      )
+      new Item(1, "backpack", "Utility", null, [0, 0, 1, 0], null, 0),
+      new Item(1, "bedroll", "Utility", null, [], null, 0),
+      new Item(2, "belt pouch", "Utility", null, [], null, 0),
+      new Item(10, "pieces of chalk", "Utility", null, [], null, 0),
+      new Item(1, "flint and steel", "Utility", null, [], null, 0),
+      new Item(50, "feet of rope", "Utility", null, [], null, 0),
+      new Item(14, "rations", "Utility", null, [], null, 0),
+      new Item(1, "soap", "Utility", null, [], null, 0),
+      new Item(5, "torches", "Utility", null, [], null, 0),
+      new Item(1, "waterskin", "Utility", null, [], null, 0),
     ],
     itembonuses: [],
     level: 1,
     money: [0, 9, 0, 0],
+    deity: ""
   };
   componentDidMount = () => {
     let state = this.state;
@@ -314,12 +232,26 @@ class Sheet extends Component {
     });
     return arr;
   };
-
   render = () => {
     return (
       <div>
-        <div>{this.getStats()}</div>
-        <div></div>
+        <div className = "top">
+          <p>{this.state.characterName}</p>
+          <p>{this.state.ancestry.name}</p>
+          <p>{`${this.state.rpgClass.name} ${this.state.level}`}</p>
+          <p>{this.state.background.name}</p>
+          <p>{this.state.ancestry.size}</p>
+          <p>{this.state.alignment}</p>
+          <p>{this.state.playerName}</p>
+          <p>{this.state.deity}</p>
+        </div>
+
+        <div className = "stats">
+          {this.getStats()}
+        </div>
+        <div className = "class-dc">
+          <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level)} trained = {this.state.classDC.trainingLevel}/>
+        </div>
       </div>
     );
   };
