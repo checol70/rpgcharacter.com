@@ -53,14 +53,14 @@ class Sheet extends Component {
         "You can withstand more punishment than most before succumbing. Increase your maximum Hit Points by your level. You reduce the DC of recovery checks by 1."
       )
     ),
-    abilityScores: [
-      new Stat("Strength", "Str", 18),
-      new Stat("Dexterity", "Dex", 12),
-      new Stat("Constitution", "Con", 16),
-      new Stat("Intelligence", "Int", 12),
-      new Stat("Wisdom", "Wis", 10),
-      new Stat("Charisma", "Cha", 10),
-    ],
+    abilityScores: {
+     Str: new Stat("Strength", "Str", 18),
+     Dex: new Stat("Dexterity", "Dex", 12),
+     Con: new Stat("Constitution", "Con", 16),
+     Int: new Stat("Intelligence", "Int", 12),
+     Wis: new Stat("Wisdom", "Wis", 10),
+     Cha: new Stat("Charisma", "Cha", 10),
+    },
     classDC: new Skill("ClassDC", "Str", "Trained"),
     skills: [
       new Skill("Acrobatics", "Dex", "Untrained"),
@@ -250,7 +250,7 @@ class Sheet extends Component {
           {this.getStats()}
         </div>
         <div className = "class-dc">
-          <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level)} trained = {this.state.classDC.trainingLevel}/>
+          <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod)} trained = {this.state.classDC.trainingLevel}/>
         </div>
       </div>
     );
