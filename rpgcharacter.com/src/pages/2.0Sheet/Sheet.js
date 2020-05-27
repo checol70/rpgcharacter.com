@@ -203,17 +203,6 @@ class Sheet extends Component {
     money: [0, 9, 0, 0],
     deity: ""
   };
-  componentDidMount = () => {
-    let state = this.state;
-    state.classDC = new Skill(
-      "Class DC",
-      "Trained",
-      "Str",
-      10 + this.calculateItemBonuses("Class DC"),
-      this.state.level
-    );
-    this.setState(state);
-  };
 
   calculateItemBonuses = (bonusType) => {
     let total = 0;
