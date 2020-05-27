@@ -157,7 +157,8 @@ class Sheet extends Component {
     bonusFeats: [],
     inventory: [
       new Item(
-        "Dagger",
+        1,
+        "dagger",
         "Weapon",
         null,
         [0, 0, 2, 0],
@@ -173,7 +174,8 @@ class Sheet extends Component {
         null
       ),
       new Item(
-        "Hide Armor",
+        1,
+        "hide armor",
         "Armor",
         "AC",
         [0,2,0,0],
@@ -181,12 +183,107 @@ class Sheet extends Component {
         2,
         null,
         "Medium",
-        
+        ["Leather"],
+        3,
+        2,
+        -2,
+        -5,
+        14
       ),
+      new Item(
+        1,
+        "backpack",
+        "Utility",
+        null,
+        [0,0,1,0],
+        null,
+        0
+      ),
+      new Item(
+        1,
+        "bedroll",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        2,
+        "belt pouch",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        10,
+        "pieces of chalk",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        1,
+        "flint and steel",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        50,
+        "feet of rope",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        14,
+        "rations",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        1,
+        "soap",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        5,
+        "torches",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      ),
+      new Item(
+        1,
+        "waterskin",
+        "Utility",
+        null,
+        [],
+        null,
+        0
+      )
     ],
     itembonuses: [],
     level: 1,
-    money: [0, 15, 0, 0],
+    money: [0, 9, 0, 0],
   };
   componentDidMount = () => {
     let state = this.state;
