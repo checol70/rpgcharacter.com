@@ -1,5 +1,5 @@
 class Skill{
-    Skill(name, stat, trainingLevel, itemBonus, level){
+    constructor(name, stat, trainingLevel, itemBonus, level){
         this.name = name;
         this.trainingLevel = trainingLevel;
         this.stat = stat;
