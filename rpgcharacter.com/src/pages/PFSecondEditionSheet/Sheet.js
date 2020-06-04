@@ -223,6 +223,8 @@ class Sheet extends Component {
   };
 
   showClassDC = ()=>{
+    console.log(this.state.classDC);
+    console.log(this.state.abilityScores);
     let amount = this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod);
     let trained = this.state.classDC.trainingLevel;
     console.log(amount);

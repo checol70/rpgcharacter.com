@@ -1,5 +1,5 @@
 class Skill{
-    Skill(name, trainingLevel,stat,itemBonus, level){
+    Skill(name, stat, trainingLevel, itemBonus, level){
         this.name = name;
         this.trainingLevel = trainingLevel;
         this.stat = stat;
