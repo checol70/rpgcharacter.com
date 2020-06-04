@@ -3,8 +3,8 @@ import "./Skill.css";
 
 export const SkillShower = (props) => (
   <li className="skill">
-    <p>{props.skill}</p>
-    <p>{props.amount}</p>
-    <p>{props.trained}</p>
+    <p className="skill-name">{props.skill}</p>
+    <p className = "amount">{props.amount}</p>
+    <p className = "trained">{props.trained}</p>
   </li>
 );

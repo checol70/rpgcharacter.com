@@ -1,5 +1,5 @@
 class Item {
-    Item(quantity, name,type, bonusType, cost, damage,  bulk, hands, group, traits, bonusValue, dexCap, checkPenalty, speedPenalty, strength, description, uses){
+    constructor(quantity, name,type, bonusType, cost, damage,  bulk, hands, group, traits, bonusValue, dexCap, checkPenalty, speedPenalty, strength, description, uses){
         this.quantity = quantity;
         this.name = name;
         this.type = type;

@@ -1,5 +1,5 @@
 class RPGClass {
-    RPGClass(name, keyAbility, hitPoints){
+    constructor(name, keyAbility, hitPoints){
         this.name = name;
         this.keyAbility = keyAbility;
         this.hitPoints = hitPoints;
