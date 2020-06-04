@@ -54,12 +54,12 @@ class Sheet extends Component {
       )
     ),
     abilityScores: {
-     Str: new Stat("Strength", "Str", 18),
-     Dex: new Stat("Dexterity", "Dex", 12),
-     Con: new Stat("Constitution", "Con", 16),
-     Int: new Stat("Intelligence", "Int", 12),
-     Wis: new Stat("Wisdom", "Wis", 10),
-     Cha: new Stat("Charisma", "Cha", 10),
+     "Str": new Stat("Strength", "Str", 18),
+     "Dex": new Stat("Dexterity", "Dex", 12),
+     "Con": new Stat("Constitution", "Con", 16),
+     "Int": new Stat("Intelligence", "Int", 12),
+     "Wis": new Stat("Wisdom", "Wis", 10),
+     "Cha": new Stat("Charisma", "Cha", 10),
     },
     classDC: new Skill("ClassDC", "Str", "Trained"),
     skills: [
@@ -221,6 +221,14 @@ class Sheet extends Component {
     });
     return arr;
   };
+
+  showClassDC = ()=>{
+    let amount = this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod);
+    let trained = this.state.classDC.trainingLevel;
+    console.log(amount);
+    console.log(trained);
+  }
+
   render = () => {
     return (
       <div>
@@ -239,7 +247,8 @@ class Sheet extends Component {
           {this.getStats()}
         </div>
         <div className = "class-dc">
-          <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod)} trained = {this.state.classDC.trainingLevel}/>
+          {this.showClassDC()}
+          {/* <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod)} trained = {this.state.classDC.trainingLevel}/> */}
         </div>
       </div>
     );
