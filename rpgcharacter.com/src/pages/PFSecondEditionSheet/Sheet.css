@@ -1,0 +1,28 @@
+.column{
+    width: 30%;
+    float: left;
+}
+.divider{
+    width: 50%;
+    float: left;
+}
+.narrow-divider{
+    width: 20%;
+    float: left;
+}
+.wide-divider{
+    width: 70%;
+    float: left;
+}
+.sheet{
+    width: 1280px;
+    margin: 0% auto;
+    background-color: chocolate;
+    height: 100%;
+}
+.block{
+    border-style: inset;
+    border-width: 1px;
+    border-color: blue;
+    box-sizing: border-box;
+}

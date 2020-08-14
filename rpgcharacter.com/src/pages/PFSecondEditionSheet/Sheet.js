@@ -12,11 +12,11 @@ import {
   Ancestry,
   Feat,
 } from "../../Constructors";
-import {SkillShower} from  "../../components/Skill"
+import { SkillShower } from "../../components/Skill";
 
 class Sheet extends Component {
   state = {
-    characterName: "Fredericus Smith",
+    characterName: "",//"Fredericus Smith",
     playerName: "Colton",
     rpgClass: new RPGClass("Fighter", "Str", 10),
     alignment: "Lawful neutral",
@@ -54,12 +54,12 @@ class Sheet extends Component {
       )
     ),
     abilityScores: {
-     "Str": new Stat("Strength", "Str", 18),
-     "Dex": new Stat("Dexterity", "Dex", 12),
-     "Con": new Stat("Constitution", "Con", 16),
-     "Int": new Stat("Intelligence", "Int", 12),
-     "Wis": new Stat("Wisdom", "Wis", 10),
-     "Cha": new Stat("Charisma", "Cha", 10),
+      Str: new Stat("Strength", "Str", 18),
+      Dex: new Stat("Dexterity", "Dex", 12),
+      Con: new Stat("Constitution", "Con", 16),
+      Int: new Stat("Intelligence", "Int", 12),
+      Wis: new Stat("Wisdom", "Wis", 10),
+      Cha: new Stat("Charisma", "Cha", 10),
     },
     classDC: new Skill("ClassDC", "Str", "Trained"),
     skills: [
@@ -201,7 +201,7 @@ class Sheet extends Component {
     itembonuses: [],
     level: 1,
     money: [0, 9, 0, 0],
-    deity: ""
+    deity: "",
   };
 
   calculateItemBonuses = (bonusType) => {
@@ -222,33 +222,36 @@ class Sheet extends Component {
     return arr;
   };
 
-  showClassDC = ()=>{
-    let amount = this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod);
+  showClassDC = () => {
+    let amount = this.state.classDC.calculateSkill(
+      this.state.level,
+      this.state.abilityScores[this.state.classDC.stat].mod
+    );
     let trained = this.state.classDC.trainingLevel;
-    return <SkillShower skill = "Class DC" amount = {amount} trained = {trained}/>;
-  }
+    return <SkillShower skill="Class DC" amount={amount} trained={trained} />;
+  };
 
   render = () => {
     return (
-      <div>
-        <div className = "top">
-          <p>{this.state.characterName}</p>
-          <p>{this.state.ancestry.name}</p>
-          <p>{`${this.state.rpgClass.name} ${this.state.level}`}</p>
-          <p>{this.state.background.name}</p>
-          <p>{this.state.ancestry.size}</p>
-          <p>{this.state.alignment}</p>
-          <p>{this.state.playerName}</p>
-          <p>{this.state.deity}</p>
+      <div className="sheet">
+        <div className="top">
+          <div className="divider">
+            <p className="block">{this.state.characterName != ""? this.state.characterName:"\xa0"}</p>
+            <p className="divider block">{this.state.playerName}</p>
+            <p className="divider block">{this.state.xp}</p>
+            <p className="block">{this.state.ancestry.size}</p>
+            <p className="block">{this.state.alignment}</p>
+          </div>
+          <div className="divider">
+            <p className="block">{this.state.ancestry.name}</p>
+            <p className="block">{this.state.background.name}</p>
+            <p className="block">{`${this.state.rpgClass.name} ${this.state.level}`}</p>
+            <p className="block">{this.state.deity}</p>
+          </div>
         </div>
 
-        <div className = "stats">
-          {this.getStats()}
-        </div>
-        <div className = "class-dc">
-          {this.showClassDC()}
-          {/* <SkillShower skill = "Class DC" amount = {this.state.classDC.calculateSkill(this.state.level, this.state.abilityScores[this.state.classDC.stat].mod)} trained = {this.state.classDC.trainingLevel}/> */}
-        </div>
+        <div className="stats">{this.getStats()}</div>
+        <div className="class-dc">{this.showClassDC()}</div>
       </div>
     );
   };

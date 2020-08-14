@@ -1,5 +1,5 @@
 class Feat{
-    Feat(name, tags, type, benefit, level, prerequisites, fullDescription, options, trigger){
+    constructor(name, tags, type, benefit, level, prerequisites, fullDescription, options, trigger){
         this.name = name;
         this.tags = tags;
         this.type = type;

@@ -40,8 +40,8 @@
     border-style: solid;
     width: 75px;
     background-color: black;
+    margin: 1% 1%;
     float: left;
-    margin: 5% 0%;
 }
 body{
     text-align: center;
