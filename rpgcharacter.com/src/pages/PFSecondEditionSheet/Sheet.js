@@ -62,6 +62,12 @@ class Sheet extends Component {
       Cha: new Stat("Charisma", "Cha", 10),
     },
     classDC: new Skill("ClassDC", "Str", "Trained"),
+    armorTraining: {
+      Unarmored: new Skill("Unarmored", null, "Trained"),
+      Light: new Skill("Light", null, "Trained"),
+      Medium: new Skill("Medium", null, "Trained"),
+      Heavy: new Skill("Heavy", null, "Trained"),
+    },
     skills: [
       new Skill("Acrobatics", "Dex", "Untrained"),
       new Skill("Arcana", "Int", "Untrained"),
@@ -84,7 +90,12 @@ class Sheet extends Component {
     ],
     meleeAttacks: [],
     rangeAttacks: [],
-    weaponProficiencies: [],
+    weaponProficiencies: [
+      new Skill("Simple", null, "Expert"),
+      new Skill("Martial", null, "Expert"),
+      new Skill("Advanced", null, "Trained"),
+      new Skill("Unarmed", null, "Expert"),
+    ],
     languages: [],
     speed: [],
     hitPoints: 10,
@@ -185,11 +196,34 @@ class Sheet extends Component {
         2,
         -2,
         -5,
-        14
+        14,
+        "Medium Leather Armor",
+        null,
+        true
       ),
-      new Item(1, "backpack", "Utility", null, [0, 0, 1, 0], null, 0),
-      new Item(1, "bedroll", "Utility", null, [], null, 0),
-      new Item(2, "belt pouch", "Utility", null, [], null, 0),
+      new Item(
+        1,
+        "Steel Shield",
+        "Shield",
+        "AC",
+        [0, 2, 0, 0],
+        null,
+        1,
+        1,
+        null,
+        null,
+        2,
+        null,
+        null,
+        0,
+        null,
+        "A steel shield to protect yourself",
+        null,
+        true
+      ),
+      new Item(1, "Backpack", "Utility", null, [0, 0, 1, 0], null, 0),
+      new Item(1, "Bedroll", "Utility", null, [], null, 0),
+      new Item(2, "Belt Pouch", "Utility", null, [], null, 0),
       new Item(10, "pieces of chalk", "Utility", null, [], null, 0),
       new Item(1, "flint and steel", "Utility", null, [], null, 0),
       new Item(50, "feet of rope", "Utility", null, [], null, 0),
@@ -207,7 +241,7 @@ class Sheet extends Component {
   calculateItemBonuses = (bonusType) => {
     let total = 0;
     this.state.itembonuses.forEach((element) => {
-      if (element.type === bonusType) {
+      if (element.type === bonusType && element.equipped === true) {
         total += element.bonusValue;
       }
     });
@@ -233,6 +267,49 @@ class Sheet extends Component {
 
   showEmptyString(string) {
     return string !== "" ? string : "\xa0";
+  }
+  calculateAC() {
+    let armorClass = 10;
+    let armorEquipped = this.state.inventory.find(
+      (element) => element.type === "Armor" && element.equipped
+    );
+    console.log(armorEquipped);
+    if (armorEquipped === null) {
+      armorEquipped = new Item(
+        1,
+        "Unarmored",
+        "Armor",
+        0,
+        null,
+        null,
+        0,
+        null,
+        "Unarmored",
+        null,
+        0,
+        100,
+        0,
+        0,
+        0,
+        "You are not wearing armor",
+        null,
+        true
+      );
+    }
+    armorClass += armorEquipped.bonusValue;
+    console.log(armorClass)
+    if (this.state.abilityScores.Dex.mod > armorEquipped.dexCap) {
+      armorClass += armorEquipped.dexCap;
+    } else {
+      armorClass += this.state.abilityScores.Dex.mod;
+    }
+    console.log(armorClass);
+    let currentArmorSkill = this.state.armorTraining[armorEquipped.group];
+    const proficiency = currentArmorSkill.calculateSkill(this.state.level, 0);
+    console.log(currentArmorSkill);
+    console.log(proficiency)
+    armorClass += proficiency;
+    return armorClass;
   }
 
   render = () => {
@@ -287,9 +364,19 @@ class Sheet extends Component {
             </div>
           </div>
         </div>
-
-        <div className="stats">{this.getStats()}</div>
-        <div className="class-dc">{this.showClassDC()}</div>
+        <div className="column">
+          <div className="stats">{this.getStats()}</div>
+          <div className="class-dc">{this.showClassDC()}</div>
+        </div>
+        <div className="column">
+          <p>Armor Class</p>
+          <p>{this.calculateAC()}</p>
+          <p>Saving Throws</p>
+        </div>
+        <div className="column">
+          <p>Hit Points</p>
+          <p>Perception</p>
+        </div>
       </div>
     );
   };

@@ -1,5 +1,5 @@
 class Item {
-    constructor(quantity, name,type, bonusType, cost, damage,  bulk, hands, group, traits, bonusValue, dexCap, checkPenalty, speedPenalty, strength, description, uses){
+    constructor(quantity, name,type, bonusType, cost, damage,  bulk, hands, group, traits, bonusValue, dexCap, checkPenalty, speedPenalty, strength, description, uses, equipped, hardness, hitPoints, brokenThreshold){
         this.quantity = quantity;
         this.name = name;
         this.type = type;
@@ -17,6 +17,10 @@ class Item {
         this.strength = strength;
         this.description = description;
         this.uses = uses;
+        this.equipped = equipped;
+        this.hardness = hardness;
+        this.hitPoints = hitPoints;
+        this.brokenThreshold = brokenThreshold;
     }
 }
 export{Item};
