@@ -16,7 +16,7 @@ import { SkillShower } from "../../components/Skill";
 
 class Sheet extends Component {
   state = {
-    characterName: "",//"Fredericus Smith",
+    characterName: "Fredericus Smith",
     playerName: "Colton",
     rpgClass: new RPGClass("Fighter", "Str", 10),
     alignment: "Lawful neutral",
@@ -231,22 +231,60 @@ class Sheet extends Component {
     return <SkillShower skill="Class DC" amount={amount} trained={trained} />;
   };
 
+  showEmptyString(string) {
+    return string !== "" ? string : "\xa0";
+  }
+
   render = () => {
     return (
       <div className="sheet">
         <div className="top">
           <div className="divider">
-            <p className="block">{this.state.characterName != ""? this.state.characterName:"\xa0"}</p>
-            <p className="divider block">{this.state.playerName}</p>
-            <p className="divider block">{this.state.xp}</p>
-            <p className="block">{this.state.ancestry.size}</p>
-            <p className="block">{this.state.alignment}</p>
+            <div className="block">
+              <p className="label">Character Name</p>
+              <p>{this.showEmptyString(this.state.characterName)}</p>
+            </div>
+            <div className="block">
+              <p className="label">Player Name</p>
+              <p>{this.showEmptyString(this.state.playerName)}</p>
+            </div>
+
+            <div className="block">
+              <p className="label">Size</p>
+              <p>{this.showEmptyString(this.state.ancestry.size)}</p>
+            </div>
+            <div className="block">
+              <p className="label">Alignment</p>
+              <p>{this.showEmptyString(this.state.alignment)}</p>
+            </div>
           </div>
           <div className="divider">
-            <p className="block">{this.state.ancestry.name}</p>
-            <p className="block">{this.state.background.name}</p>
-            <p className="block">{`${this.state.rpgClass.name} ${this.state.level}`}</p>
-            <p className="block">{this.state.deity}</p>
+            <div className="block">
+              <p className="label">Ancestry</p>
+              <p>{this.showEmptyString(this.state.ancestry.name)}</p>
+            </div>
+            <div className="block">
+              <p className="label">Background</p>
+              <p>{this.showEmptyString(this.state.background.name)}</p>
+            </div>
+            <div className="block-holder">
+              <div className="divider block">
+                <p className="label">Experience</p>
+                <p>{this.showEmptyString(this.state.xp)}</p>
+              </div>
+              <div className="block">
+                <p className="label">Level</p>
+                <p>
+                  {this.showEmptyString(
+                    `${this.state.rpgClass.name} ${this.state.level}`
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="block">
+              <p className="label">Deity</p>
+              <p>{this.showEmptyString(this.state.deity)}</p>
+            </div>
           </div>
         </div>
 

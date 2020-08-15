@@ -21,8 +21,15 @@
     height: 100%;
 }
 .block{
-    border-style: inset;
+    border-style: solid;
     border-width: 1px;
     border-color: blue;
     box-sizing: border-box;
+    height: 40px;
+}
+.label{
+    text-align: left;
+}
+.block-holder{
+    height: 40px;
 }
